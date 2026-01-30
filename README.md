@@ -246,5 +246,6 @@ sudo nixos-rebuild switch
 reboot
 ```
 <img width="256" height="256" alt="image" src="https://github.com/user-attachments/assets/dfe777ad-c49a-42e0-9ea3-743c62c0093b" />
+![DFHeader](https://github.com/user-attachments/assets/531528ef-a3d1-405d-92e4-0ced7141d2b6)
 
 
