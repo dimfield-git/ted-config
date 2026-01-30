@@ -69,7 +69,7 @@ ted-config/
 └── .zshrc
 ```
 
-# TedOS — InstallationInstructions.md
+# TedOS — Installation Instructions.md
 
 This document is written entirely in Markdown.  
 All commands are presented in fenced code blocks.
