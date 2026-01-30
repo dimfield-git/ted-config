@@ -245,6 +245,6 @@ sudo nixos-rebuild switch
 ```bash
 reboot
 ```
-<img width="1024" height="1024" alt="image" src="https://github.com/user-attachments/assets/dfe777ad-c49a-42e0-9ea3-743c62c0093b" />
+<img width="1024/4" height="1024/4" alt="image" src="https://github.com/user-attachments/assets/dfe777ad-c49a-42e0-9ea3-743c62c0093b" />
 
 
