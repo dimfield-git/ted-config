@@ -66,6 +66,7 @@ ted-config/
 │   ├── tedos-hud
 │   └── tedos-procs
 └── .zshrc
+```
 
 # TedOS — InstallationInstructions.md
 
@@ -109,4 +110,139 @@ Identify the USB device (example output shows it as `/dev/sda`; yours may differ
 
 ```bash
 lsblk -o NAME,SIZE,MODEL,TYPE,MOUNTPOINTS
+```
+Unmount any mounted partitions on the USB (if any).
+```bash
+sudo umount /dev/sdX* 2>/dev/null || true
+```
+Flash the ISO to the USB device (replace sdX with the USB device, e.g. sda).
+```bash
+cd ~/Downloads
+sudo dd if=nixos-minimal-*.iso of=/dev/sdX bs=4M status=progress conv=fsync
+sync
+sudo eject /dev/sdX
+```
+3. Boot the installer USB (UEFI)
+
+Reboot and select the USB in the boot menu in UEFI mode.
+
+After booting into the installer shell, confirm disks.
+```bash
+lsblk -o NAME,SIZE,MODEL,TYPE
+```
+4. Connect to the network (if needed)
+
+If wired, networking may already work.
+
+For Wi-Fi, use NetworkManager (nmcli).
+```bash
+sudo -i
+nmcli dev wifi list
+nmcli dev wifi connect "SSID" password "PASSWORD"
+```
+5. Partition and encrypt the target disk
+
+Partitioning choices vary. A common recommended layout:
+
+EFI System Partition (FAT32, ~1 GiB)
+
+Encrypted root partition (LUKS, rest of disk)
+
+After partitioning, open the LUKS container, format, and mount to /mnt.
+
+You will execute the exact partition/encryption commands appropriate to your disk and preference at install time.
+
+6. Generate initial NixOS config
+```bash
+nixos-generate-config --root /mnt
+```
+7. Ensure baseline requirements are present in installed system
+
+Before installing, ensure the configuration used for the first boot includes:
+
+A normal user ted
+
+Networking (NetworkManager)
+
+SSH enabled
+
+If you are using the generated configuration for the base install, edit:
+```bash
+nano /mnt/etc/nixos/configuration.nix
+```
+Add/ensure:
+```bash
+networking.networkmanager.enable = true;
+services.openssh.enable = true;
+
+users.users.ted = {
+  isNormalUser = true;
+  extraGroups = [ "wheel" "networkmanager" ];
+};
+```
+8. Install NixOS
+```bash
+nixos-install
+```
+Reboot into the installed system.
+```bash
+reboot
+```
+Remove the USB when it begins rebooting.
+
+Stage 2 — Copy TedOS Config From Ubuntu Studio
+1. Find TedOS IP address
+
+On TedOS, run:
+```bash
+ip a
+```
+Note the IP address of the active interface.
+
+2. Copy the config directory from Ubuntu Studio to TedOS
+
+On Ubuntu Studio:
+```bash
+scp -r ~/tedos-config ted@TEDOS_IP:~
+```
+Replace TEDOS_IP with the actual IP address.
+
+Stage 3 — Apply TedOS Configuration (on TedOS)
+1. Apply system configuration
+```bash
+sudo cp ~/tedos-config/nixos/configuration.nix /etc/nixos/configuration.nix
+```
+2. Create user config directories
+```bash
+mkdir -p ~/.config/{sway,kitty,tmux,yazi} ~/bin
+```
+3. Copy user configuration files
+```bash
+cp ~/tedos-config/sway/config ~/.config/sway/config
+cp ~/tedos-config/kitty/kitty.conf ~/.config/kitty/kitty.conf
+cp ~/tedos-config/tmux/tmux.conf ~/.config/tmux/tmux.conf
+cp ~/tedos-config/yazi/yazi.toml ~/.config/yazi/yazi.toml
+cp ~/tedos-config/yazi/keymap.toml ~/.config/yazi/keymap.toml
+cp ~/tedos-config/.zshrc ~/.zshrc
+```
+4. Install HUD scripts
+```bash
+cp ~/tedos-config/bin/tedos-hud ~/bin/tedos-hud
+cp ~/tedos-config/bin/tedos-procs ~/bin/tedos-procs
+chmod +x ~/bin/tedos-hud ~/bin/tedos-procs
+```
+5. Ensure ~/bin is on PATH
+If ~/bin is not already on PATH, add this to your ~/.zshrc:
+```bash
+export PATH="$HOME/bin:$PATH"
+```
+6. Rebuild system
+```bash
+sudo nixos-rebuild switch
+```
+7. Reboot
+```bash
+reboot
+```
+
 
