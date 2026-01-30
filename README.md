@@ -66,3 +66,47 @@ ted-config/
 │   ├── tedos-hud
 │   └── tedos-procs
 └── .zshrc
+
+# TedOS — InstallationInstructions.md
+
+This document is written entirely in Markdown.  
+All commands are presented in fenced code blocks.
+
+---
+
+## Overview
+
+This install uses a two-stage workflow:
+
+1. Install a clean NixOS base system to the target disk.
+2. Copy and apply the TedOS configuration after installation.
+
+The TedOS repository/config is not required during the NixOS installer.
+
+---
+
+## Assumptions
+
+- You have a working Ubuntu Studio (or other Linux) system with the `tedos-config` folder available.
+- You will install TedOS onto a dedicated target disk (example: `/dev/nvme1n1`).
+- You want a terminal-centric cockpit using sway + kitty to host TUI apps (Yazi, tmux, etc.).
+- A user account `ted` will exist on TedOS.
+- SSH access between Ubuntu Studio and TedOS will be used to copy files after the base install.
+
+---
+
+## Stage 1 — Install Base NixOS
+
+### 1. Download NixOS Minimal ISO
+
+Download the current NixOS Minimal ISO (x86_64) from the official site.
+
+---
+
+### 2. Flash the ISO to a USB stick (Ubuntu Studio)
+
+Identify the USB device (example output shows it as `/dev/sda`; yours may differ).
+
+```bash
+lsblk -o NAME,SIZE,MODEL,TYPE,MOUNTPOINTS
+
