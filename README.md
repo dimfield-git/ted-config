@@ -245,7 +245,8 @@ sudo nixos-rebuild switch
 ```bash
 reboot
 ```
-<img width="256" height="256" alt="image" src="https://github.com/user-attachments/assets/dfe777ad-c49a-42e0-9ea3-743c62c0093b" />
+<img width=![DFHeader](https://github.com/user-attachments/assets/27c9def1-a896-4567-99bc-fa99cb105150)
+"256" height="256" alt="image" src="https://github.com/user-attachments/assets/dfe777ad-c49a-42e0-9ea3-743c62c0093b" />
 
 ![Uploading DFHeader.jpg…]()
 
