@@ -246,6 +246,7 @@ sudo nixos-rebuild switch
 reboot
 ```
 
+![DFHeader](https://github.com/user-attachments/assets/6438e198-0006-460b-828a-1c450312516b)
 
 
 
