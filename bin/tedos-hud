@@ -1,0 +1,113 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+vpn_status() {
+  # tmux color wrappers
+  local GREEN="#[fg=#22c55e,bold]"
+  local REDDIM="#[fg=#7f1d1d]"
+  local RESET="#[default]"
+
+  if command -v mullvad >/dev/null 2>&1; then
+    if mullvad status 2>/dev/null | grep -qi "connected"; then
+      echo "${GREEN}VPN:ON${RESET}"
+      return
+    fi
+    echo "${REDDIM}VPN:OFF${RESET}"
+    return
+  fi
+
+  if command -v wg >/dev/null 2>&1 && wg show 2>/dev/null | grep -q "interface:"; then
+    echo "${GREEN}VPN:WG${RESET}"
+    return
+  fi
+
+  if ip link 2>/dev/null | grep -Eq '\b(tun0|tap0|ppp0)\b'; then
+    echo "${GREEN}VPN:TUN${RESET}"
+    return
+  fi
+
+  echo "${REDDIM}VPN:OFF${RESET}"
+}
+
+# --- VPN detection (tries Mullvad, then WireGuard, then tun devices) ---
+vpn_status() {
+  if command -v mullvad >/dev/null 2>&1; then
+    # mullvad status returns text; we just look for "Connected"
+    if mullvad status 2>/dev/null | grep -qi "connected"; then
+      echo "VPN:ON"
+      return
+    fi
+    echo "VPN:OFF"
+    return
+  fi
+
+  # WireGuard interface present?
+  if command -v wg >/dev/null 2>&1 && wg show 2>/dev/null | grep -q "interface:"; then
+    echo "VPN:WG"
+    return
+  fi
+
+  # tun/tap/ppp present?
+  if ip link 2>/dev/null | grep -Eq '\b(tun0|tap0|ppp0)\b'; then
+    echo "VPN:TUN"
+    return
+  fi
+
+  echo "VPN:OFF"
+}
+
+# --- SSH sessions count (how many remote logins are active) ---
+ssh_sessions() {
+  if command -v ss >/dev/null 2>&1; then
+    # Count established SSH connections to local sshd (port 22)
+    local n
+    n="$(ss -tn state established '( sport = :22 )' 2>/dev/null | tail -n +2 | wc -l)"
+    echo "SSH:${n}"
+    return
+  fi
+  echo "SSH:?"
+}
+
+# --- CPU usage (simple, cheap estimate) ---
+cpu_usage() {
+  # Use /proc/stat twice with a short delay
+  local a b idle_a idle_b total_a total_b
+  read -r _ a < /proc/stat
+  # a = "user nice system idle iowait irq softirq steal guest guest_nice"
+  # Split:
+  set -- $a
+  local user1=$1 nice1=$2 sys1=$3 idle1=$4 iow1=$5 irq1=$6 sirq1=$7 steal1=$8
+  total_a=$((user1+nice1+sys1+idle1+iow1+irq1+sirq1+steal1))
+  idle_a=$((idle1+iow1))
+
+  sleep 0.2
+
+  read -r _ b < /proc/stat
+  set -- $b
+  local user2=$1 nice2=$2 sys2=$3 idle2=$4 iow2=$5 irq2=$6 sirq2=$7 steal2=$8
+  total_b=$((user2+nice2+sys2+idle2+iow2+irq2+sirq2+steal2))
+  idle_b=$((idle2+iow2))
+
+  local dt=$((total_b-total_a))
+  local di=$((idle_b-idle_a))
+  if [ "$dt" -le 0 ]; then
+    echo "CPU:?"
+    return
+  fi
+  local used=$(( (100*(dt-di))/dt ))
+  echo "CPU:${used}%"
+}
+
+# --- Disk free for / (root) ---
+disk_free() {
+  # human-readable avail on /
+  local avail
+  avail="$(df -h --output=avail / 2>/dev/null | tail -n 1 | tr -d ' ')"
+  echo "DISK:${avail}"
+}
+
+printf "%s %s %s %s" \
+  "$(vpn_status)" \
+  "$(ssh_sessions)" \
+  "$(cpu_usage)" \
+  "$(disk_free)"

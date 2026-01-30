@@ -1,0 +1,5 @@
+[manager]
+prepend_keymap = [
+  { on = [ "g", "h" ], run = "cd ~", desc = "Home" },
+  { on = [ "g", "r" ], run = "cd /", desc = "Root" }
+]

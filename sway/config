@@ -1,0 +1,36 @@
+# TedOS Cockpit (sway)
+set $mod Mod4
+set $term kitty
+
+# No bar = clean cockpit
+bar { mode invisible }
+
+# Keybinds
+bindsym $mod+Return exec $term
+bindsym $mod+Shift+q kill
+bindsym $mod+q exit
+
+# Focus like vim
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# Splits like Terminator
+bindsym $mod+v split v
+bindsym $mod+b split h
+
+# Fullscreen
+bindsym $mod+f fullscreen toggle
+
+# Workspaces
+set $ws1 "1:Yazi"
+set $ws2 "2:Term"
+
+# Autostart: one terminal runs yazi, another runs tmux
+exec_always $term --title YAZI -e yazi
+exec_always $term --title TERM -e tmux new -A -s main
+
+assign [title="YAZI"] $ws1
+assign [title="TERM"] $ws2
+workspace $ws1

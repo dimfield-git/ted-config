@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Programs you care about. Add/remove freely.
+WATCH=(
+  yazi
+  nvim
+  vim
+  ssh
+  python
+  node
+  docker
+  podman
+  tailscale
+  mullvad
+  wg
+)
+
+running=()
+for p in "${WATCH[@]}"; do
+  if pgrep -x "$p" >/dev/null 2>&1; then
+    running+=("$p")
+  fi
+done
+
+if [ "${#running[@]}" -eq 0 ]; then
+  echo "RUN:-"
+else
+  # Join with commas
+  (IFS=,; echo "RUN:${running[*]}")
+fi
