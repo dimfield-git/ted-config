@@ -1,7 +1,7 @@
 # TedOS — Terminal Cockpit NixOS
 <img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/d0f68445-0ac0-4406-9248-5d3dcd7f1667" />
 
-TedOS is a terminal-centric NixOS configuration built as a **“non-GUI GUI”**:  
+TedOS is a terminal-centric NixOS configuration built as a **“non-GUI"-GUI**:  
 a minimal graphical substrate (sway + kitty) hosting a powerful text-based cockpit built around **tmux**, **Yazi**, and **Neovim**.
 
 There is **no desktop environment**.  
