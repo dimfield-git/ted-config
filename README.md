@@ -8,7 +8,7 @@ There is **no desktop environment**.
 All work happens in terminal / TUI applications.
 
 ---
-<img width="416" height="405" alt="TedOSIcon2" src="https://github.com/user-attachments/assets/f03661c2-a371-4307-a85a-f36e12da18a5" />
+<img width="41.6" height="40.5" alt="TedOSIcon2" src="https://github.com/user-attachments/assets/f03661c2-a371-4307-a85a-f36e12da18a5" />
 
 ## Philosophy
 
@@ -70,7 +70,7 @@ ted-config/
 └── .zshrc
 ```
 
-<img width="414" height="400" alt="TedOSIcon1" src="https://github.com/user-attachments/assets/0db8a7ab-7a5a-4f6a-a2b6-9b1e423781e8" />
+<img width="41.4" height="40.0" alt="TedOSIcon1" src="https://github.com/user-attachments/assets/0db8a7ab-7a5a-4f6a-a2b6-9b1e423781e8" />
 
 
 # TedOS — Installation Instructions.md
