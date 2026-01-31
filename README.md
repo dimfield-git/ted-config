@@ -69,7 +69,7 @@ ted-config/
 └── .zshrc
 ```
 
-#<img width="41.4" height="40.0" alt="TedOSIcon1" src="https://github.com/user-attachments/assets/0db8a7ab-7a5a-4f6a-a2b6-9b1e423781e8" />  — Installation Instructions.md
+# <img width="41.4" height="40.0" alt="TedOSIcon1" src="https://github.com/user-attachments/assets/0db8a7ab-7a5a-4f6a-a2b6-9b1e423781e8" />  — Installation Instructions.md
 
 This document is written entirely in Markdown.  
 All commands are presented in fenced code blocks.
