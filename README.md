@@ -10,7 +10,7 @@ All work happens in terminal / TUI applications.
 
 ---
 
-## <img width="41.6" height="40.5" alt="TedOSIcon2" src="https://github.com/user-attachments/assets/f03661c2-a371-4307-a85a-f36e12da18a5" /> Philosophy
+## <img width="33.28" height="32.4" alt="TedOSIcon2" src="https://github.com/user-attachments/assets/f03661c2-a371-4307-a85a-f36e12da18a5" /> Philosophy
 
 **Know what you get - get what you know!**
 - GUI exists **only** to render terminal windows
