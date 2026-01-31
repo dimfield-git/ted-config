@@ -10,7 +10,7 @@ All work happens in terminal / TUI applications.
 
 ---
 
-## <img width="33.28" height="32.4" alt="TedOSIcon2" src="https://github.com/user-attachments/assets/f03661c2-a371-4307-a85a-f36e12da18a5" />  Philosophy
+## <img width="33.28" height="32.4" alt="TedOSIcon2" src="https://github.com/user-attachments/assets/f03661c2-a371-4307-a85a-f36e12da18a5" /> - Philosophy
 
 **Know what you get - get what you know!**
 - GUI exists **only** to render terminal windows
@@ -70,7 +70,7 @@ ted-config/
 └── .zshrc
 ```
 
-# <img width="82.8" height="80.0" alt="TedOSIcon1" src="https://github.com/user-attachments/assets/0db8a7ab-7a5a-4f6a-a2b6-9b1e423781e8" /> "    "Installation Instructions
+# <img width="82.8" height="80.0" alt="TedOSIcon1" src="https://github.com/user-attachments/assets/0db8a7ab-7a5a-4f6a-a2b6-9b1e423781e8" /> - Installation Instructions
 
 This document is written entirely in Markdown.  
 All commands are presented in fenced code blocks.
