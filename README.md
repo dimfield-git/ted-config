@@ -88,11 +88,10 @@ The TedOS repository/config is not required during the NixOS installer.
 
 ## Assumptions
 
-- You have a working Ubuntu Studio (or other Linux) system with the `tedos-config` folder available.
 - You will install TedOS onto a dedicated target disk (example: `/dev/nvme1n1`).
 - You want a terminal-centric cockpit using sway + kitty to host TUI apps (Yazi, tmux, etc.).
 - A user account `ted` will exist on TedOS.
-- SSH access between Ubuntu Studio and TedOS will be used to copy files after the base install.
+- SSH access between primary OS and TedOS will be used to copy files after the base install. (Alternative route: Install NixOS with Network then fetch config from github, or use USB-stick)
 
 ---
 
