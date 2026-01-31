@@ -1,4 +1,6 @@
-# TedOS — Terminal Cockpit NixOS
+# <img width="1476" height="252" alt="tedosbydimfieldbanner2" src="https://github.com/user-attachments/assets/41d2ef03-6306-461d-84ed-311b7efce771" />
+
+
 <img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/d0f68445-0ac0-4406-9248-5d3dcd7f1667" />
 
 TedOS is a terminal-centric NixOS configuration built as a **“non-GUI"-GUI**:  
