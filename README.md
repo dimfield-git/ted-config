@@ -105,7 +105,7 @@ Download the current NixOS Minimal ISO (x86_64) from the official site.
 
 ---
 
-### 2. Flash the ISO to a USB stick (Ubuntu Studio)
+### 2. Flash the ISO to a USB stick
 
 Identify the USB device (example output shows it as `/dev/sda`; yours may differ).
 
