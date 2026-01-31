@@ -11,10 +11,11 @@ All work happens in terminal / TUI applications.
 
 ## Philosophy
 
-**Know what you get - get what you know**
+**Know what you get - get what you know!**
 - GUI exists **only** to render terminal windows
 - All interaction is **TUI / CLI**
 - Reproducible, declarative system (NixOS)
+- Build your own system module by modyle, packet by packet, byte by byte
 - Incremental, inspectable evolution
 - Clear separation between:
   - **Creative workstation** (Ubuntu Studio)
