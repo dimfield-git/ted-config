@@ -245,7 +245,6 @@ sudo nixos-rebuild switch
 reboot
 ```
 
-![DFHeader](https://github.com/user-attachments/assets/6438e198-0006-460b-828a-1c450312516b)
-
+<img width="1476" height="252" alt="tedosbydimfieldbanner2" src="https://github.com/user-attachments/assets/18052ba2-7bc0-4682-a363-466ae2f50700" />
 
 
