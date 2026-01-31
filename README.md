@@ -1,4 +1,4 @@
-# TedOS — Terminal Cockpit NixOS
+# <img width="41.6" height="40.5" alt="TedOSIcon2" src="https://github.com/user-attachments/assets/f03661c2-a371-4307-a85a-f36e12da18a5" />  TedOS — Terminal Cockpit NixOS
 
 
 <img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/d0f68445-0ac0-4406-9248-5d3dcd7f1667" />
@@ -10,7 +10,7 @@ All work happens in terminal / TUI applications.
 
 ---
 
-## <img width="33.28" height="32.4" alt="TedOSIcon2" src="https://github.com/user-attachments/assets/f03661c2-a371-4307-a85a-f36e12da18a5" /> Philosophy
+## Philosophy
 
 **Know what you get - get what you know!**
 - GUI exists **only** to render terminal windows
