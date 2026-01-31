@@ -17,9 +17,6 @@ All work happens in terminal / TUI applications.
 - Reproducible, declarative system (NixOS)
 - Build your own system module by modyle, packet by packet, byte by byte
 - Incremental, inspectable evolution
-- Clear separation between:
-  - **Creative workstation** (Ubuntu Studio)
-  - **System / ops / dev / OSINT box** (TedOS)
 
 ---
 
