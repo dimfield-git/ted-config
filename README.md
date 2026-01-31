@@ -14,7 +14,7 @@ All work happens in terminal / TUI applications.
 **Know what you get - get what you know!**
 - GUI exists **only** to render terminal windows
 - All interaction is **TUI / CLI**
-- Baseline operations using tmux and yaze file manager
+- Baseline operations using tmux and yazi file manager
 - Reproducible, declarative system (NixOS)
 - Build your own system module by modyle, packet by packet, byte by byte
 - Incremental, inspectable evolution
