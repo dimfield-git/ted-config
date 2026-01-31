@@ -1,4 +1,4 @@
-# <img width="348" height="310" alt="TedOSIcon4" src="https://github.com/user-attachments/assets/491d24d8-4cf1-49e1-8c66-e1f9067494b7" /> TedOS — Terminal Cockpit NixOS
+# <img width="34.8" height="31.0" alt="TedOSIcon4" src="https://github.com/user-attachments/assets/491d24d8-4cf1-49e1-8c66-e1f9067494b7" /> TedOS — Terminal Cockpit NixOS
 
 
 
