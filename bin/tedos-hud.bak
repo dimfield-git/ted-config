@@ -2,35 +2,59 @@
 set -euo pipefail
 
 vpn_status() {
-  # Output tmux colors only when running inside tmux
-  local in_tmux=0
-  [ -n "${TMUX-}" ] && in_tmux=1
-
-  local GREEN="" REDDIM="" RESET=""
-  if [ "$in_tmux" -eq 1 ]; then
-    GREEN="#[fg=#22c55e,bold]"
-    REDDIM="#[fg=#7f1d1d]"
-    RESET="#[default]"
-  fi
+  # tmux color wrappers
+  local GREEN="#[fg=#22c55e,bold]"
+  local REDDIM="#[fg=#7f1d1d]"
+  local RESET="#[default]"
 
   if command -v mullvad >/dev/null 2>&1; then
     if mullvad status 2>/dev/null | grep -qi "connected"; then
-      echo "${GREEN}VPN:ON${RESET}"; return
+      echo "${GREEN}VPN:ON${RESET}"
+      return
     fi
-    echo "${REDDIM}VPN:OFF${RESET}"; return
+    echo "${REDDIM}VPN:OFF${RESET}"
+    return
   fi
 
   if command -v wg >/dev/null 2>&1 && wg show 2>/dev/null | grep -q "interface:"; then
-    echo "${GREEN}VPN:WG${RESET}"; return
+    echo "${GREEN}VPN:WG${RESET}"
+    return
   fi
 
-  if ip link 2>/dev/null | grep -Eq "\b(tun0|tap0|ppp0)\b"; then
-    echo "${GREEN}VPN:TUN${RESET}"; return
+  if ip link 2>/dev/null | grep -Eq '\b(tun0|tap0|ppp0)\b'; then
+    echo "${GREEN}VPN:TUN${RESET}"
+    return
   fi
 
   echo "${REDDIM}VPN:OFF${RESET}"
 }
 
+# --- VPN detection (tries Mullvad, then WireGuard, then tun devices) ---
+vpn_status() {
+  if command -v mullvad >/dev/null 2>&1; then
+    # mullvad status returns text; we just look for "Connected"
+    if mullvad status 2>/dev/null | grep -qi "connected"; then
+      echo "VPN:ON"
+      return
+    fi
+    echo "VPN:OFF"
+    return
+  fi
+
+  # WireGuard interface present?
+  if command -v wg >/dev/null 2>&1 && wg show 2>/dev/null | grep -q "interface:"; then
+    echo "VPN:WG"
+    return
+  fi
+
+  # tun/tap/ppp present?
+  if ip link 2>/dev/null | grep -Eq '\b(tun0|tap0|ppp0)\b'; then
+    echo "VPN:TUN"
+    return
+  fi
+
+  echo "VPN:OFF"
+}
 
 # --- SSH sessions count (how many remote logins are active) ---
 ssh_sessions() {
