@@ -1,8 +1,8 @@
 ##  A1. Create and boot a VM from the NixOS ISO
 
 
--A1.1 Configure VM networking (NAT with port-forward or Bridged)
--A1.2 Enable SSH access to the installer (network available)
+A1.1 Select VM network mode (NAT with port-forward host 2222 → guest 22 or Bridged)
+A1.2 Ensure the VM has network connectivity so SSH access to the installer is possible
 
 
 ##  A2. Enter NixOS installer environment, partition disks, and mount filesystems
