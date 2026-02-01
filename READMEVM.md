@@ -4,7 +4,9 @@ Ensure EFI-mode is checked
 Type: Linux, Other Linux 64-bit
 
 **IMPORTANT**
+
 **A1.1** Select VM network mode (NAT with port-forward host 2222 → guest 22 or Bridged)
+
 **A1.2** Ensure the VM has network connectivity so SSH access to the installer is possible
 
 
@@ -13,11 +15,13 @@ Type: Linux, Other Linux 64-bit
 ##  A2. Enter NixOS installer environment, partition disks, and mount filesystems
 
 
--A2.1 Run command:
+**A2.1** Run command:
+
 ```bash
 sudo loadkeys sv-latin1
+
 ```
--A2.2 SSH into the NixOS installer from the host terminal
+**A2.2** SSH into the NixOS installer from the host terminal
 On the VM Console run:
 ```bash
 sudo systemctl start sshd
@@ -29,7 +33,6 @@ On the host terminal run (replace VM_IP with the IP you got):
 ssh nixos@VM_IP
 ```
 If you are using VirtualBox NAT with port-forward (host 2222 → guest 22), use:
-
 ```bash
 ssh -p 2222 nixos@127.0.0.1
 ```
