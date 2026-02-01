@@ -13,6 +13,20 @@
 sudo loadkeys sv-latin1
 ```
 -A2.2 SSH into the NixOS installer from the host terminal
+On the VM Console run:
+```bash
+sudo systemctl start sshd
+sudo passwd nixos
+ip -4 addr show | grep -Eo 'inet ([0-9]+\.){3}[0-9]+' | awk '{print $2}'
+```
+On the host terminal run (replace VM_IP with the IP you got):
+```bash
+ssh nixos@VM_IP
+```
+If you are using VirtualBox NAT with port-forward (host 2222 → guest 22), use:
+```bash
+ssh -p 2222 nixos@127.0.0.1
+``` 
 
 ---
 
