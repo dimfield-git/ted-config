@@ -105,7 +105,19 @@ You want:
 
 ##  B1. Generate NixOS configuration and replace it with TedOS configuration
 
-**B1.1** Generate necessary configs
+**B1.1** Generate necessary configuration files (two files) under /mnt/etc/nixos/:
+
+```bash
+sudo nixos-generate-config --root /mnt
+ls -l /mnt/etc/nixos/
+```
+
+**File 1:** hardware-configuration.nix 
+*auto-detected hardware + mount config for this VM (disk UUIDs, filesystem mounts, drivers*
+
+**File 2:** configuration.nix **(default stub)**
+*a starting system config template we use it mainly as a placeholder and then replace it with your TedOS configuration.nix*
+
 
 **B1.2** Copy files for TedOS in folder ted-config from host into VM via scp over SSH
 
