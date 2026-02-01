@@ -116,7 +116,7 @@ ls -l /mnt/etc/nixos/
 
 *auto-detected hardware + mount config for this VM (disk UUIDs, filesystem mounts, drivers*
 
-**File 2:** ```bash configuration.nix **(default stub)**```
+**File 2:** ```bash configuration.nix``` **(default stub)**
 
 *a starting system config template we use it mainly as a placeholder and then replace it with your TedOS configuration.nix*
 
