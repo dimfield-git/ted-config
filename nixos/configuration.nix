@@ -1,6 +1,12 @@
 { config, pkgs, ... }:
 
+
+
 {
+  imports = [./hardware-configuration.nix];
+
+
+
   # --- Base identity ---
   networking.hostName = "tedos";
   time.timeZone = "Europe/Stockholm";
@@ -8,6 +14,7 @@
 
   # --- Networking ---
   networking.networkmanager.enable = true;
+
 
   # --- User ---
   users.users.ted = {
