@@ -61,7 +61,10 @@ sudo mount /dev/sda1 /mnt/boot
 
 If your VM disk shows up as /dev/vda (rare in VirtualBox) or similar, replace /dev/sda accordingly.
 
-1. Verify partitions exist and look right
+
+**Verification (Recommended)**
+
+**V1.** Verify partitions exist and look right
 ```bash
 lsblk -f
 ```
@@ -71,7 +74,7 @@ You want to see:
 
 /dev/sda2 = ext4 (root)
 
-2. Verify the mounts are correct
+**V2.** Verify the mounts are correct
 ```bash
 mount | grep -E ' /mnt($| )| /mnt/boot($| )'
 ```
@@ -81,7 +84,7 @@ You want:
 
 /dev/sda1 mounted on /mnt/boot
 
-3. Sanity-check the EFI partition is FAT32
+**V3.** Sanity-check the EFI partition is FAT32
 ```bash
 sudo blkid /dev/sda1
 ```
@@ -89,7 +92,7 @@ You want:
 
 You want TYPE="vfat"
 
-4. Confirm /mnt is writable (format worked)
+**V4.** Confirm /mnt is writable (format worked)
 ```bash
 sudo touch /mnt/OK && ls -l /mnt/OK
 ```
@@ -102,9 +105,9 @@ You want:
 
 ##  B1. Generate NixOS configuration and replace it with TedOS configuration
 
--B1.1 Generate necessary configs
+**B1.1** Generate necessary configs
 
--B1.2 Copy files for TedOS in folder ted-config from host into VM via scp over SSH
+**B1.2** Copy files for TedOS in folder ted-config from host into VM via scp over SSH
 
 ##  B2. Install NixOS and reboot the VM
 
