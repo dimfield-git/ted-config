@@ -4,8 +4,8 @@ Ensure EFI-mode is checked
 Type: Linux, Other Linux 64-bit
 
 **IMPORTANT**
-A1.1 Select VM network mode (NAT with port-forward host 2222 → guest 22 or Bridged)
-A1.2 Ensure the VM has network connectivity so SSH access to the installer is possible
+**A1.1** Select VM network mode (NAT with port-forward host 2222 → guest 22 or Bridged)
+**A1.2** Ensure the VM has network connectivity so SSH access to the installer is possible
 
 
 
