@@ -123,6 +123,53 @@ ls -l /mnt/etc/nixos/
 
 **B1.2** Copy files for TedOS in folder ted-config from host into VM via scp over SSH
 
+On your host machine (where ted-config repository lives):
+```bash
+# Copy the entire ted-config directory to the VM
+scp -r ~/path/to/ted-config nixos@VM_IP:/tmp/
+
+# Or if using VirtualBox NAT with port forward:
+scp -P 2222 -r ~/path/to/ted-config nixos@127.0.0.1:/tmp/
+```
+
+Then on the VM (via SSH session):
+```bash
+# Verify the files arrived
+ls -l /tmp/ted-config/
+
+# Replace the generated configuration.nix with your TedOS one
+sudo cp /tmp/ted-config/nixos/configuration.nix /mnt/etc/nixos/configuration.nix
+
+# Also copy your other config files to the mounted system
+# (sway, kitty, tmux, etc. - but these go to user home, so maybe do this after install?)
+```
+
+Commands for copying user config files:
+```bash
+# Still on the VM via SSH, after copying configuration.nix
+
+# Create config directories in the new system's user home
+sudo mkdir -p /mnt/home/ted/.config/{sway,kitty,tmux,yazi}
+sudo mkdir -p /mnt/home/ted/bin
+
+# Copy user configs
+sudo cp /tmp/ted-config/sway/config /mnt/home/ted/.config/sway/config
+sudo cp /tmp/ted-config/kitty/kitty.conf /mnt/home/ted/.config/kitty/kitty.conf
+sudo cp /tmp/ted-config/tmux/tmux.conf /mnt/home/ted/.config/tmux/tmux.conf
+sudo cp /tmp/ted-config/yazi/yazi.toml /mnt/home/ted/.config/yazi/yazi.toml
+sudo cp /tmp/ted-config/yazi/keymap.toml /mnt/home/ted/.config/yazi/keymap.toml
+sudo cp /tmp/ted-config/.zshrc /mnt/home/ted/.zshrc
+
+# Copy HUD scripts
+sudo cp /tmp/ted-config/bin/tedos-hud /mnt/home/ted/bin/tedos-hud
+sudo cp /tmp/ted-config/bin/tedos-procs /mnt/home/ted/bin/tedos-procs
+sudo chmod +x /mnt/home/ted/bin/tedos-hud /mnt/home/ted/bin/tedos-procs
+
+# Fix ownership (important!)
+sudo chown -R 1000:100 /mnt/home/ted
+```
+
+
 ##  B2. Install NixOS and reboot the VM
 
 ---
