@@ -172,5 +172,55 @@ sudo chown -R 1000:100 /mnt/home/ted
 
 ##  B2. Install NixOS and reboot the VM
 
+```bash
+# Still in the VM SSH session
+# Install NixOS to /mnt
+sudo nixos-install
+
+# It will prompt you to set a root password - do that
+
+# After installation completes successfully
+reboot
+```
+
 ---
 ##  C1. Verify boot into TedOS cockpit
+
+After the reboot, you'll want to remove the ISO from the VM (or change boot order) so it boots from the installed disk instead of the installer.
+
+Veryfy that:
+  System boots
+  Auto-login works
+  Sway launches
+  Yazi appears in workspace 1
+  tmux with HUD appears in workspace 2
+
+# After first boot, login as ted
+
+```bash
+# Verify programs are installed
+which sway
+which tmux
+which yazi
+which kitty
+
+# Check if config files exist
+ls -la ~/.config/sway/config
+ls -la ~/.config/tmux/tmux.conf
+ls -la ~/.config/yazi/yazi.toml
+ls -la ~/bin/tedos-hud
+
+# Test HUD scripts work
+~/bin/tedos-hud
+~/bin/tedos-procs
+
+# Check if sway is running (if you're in the graphical session)
+echo $WAYLAND_DISPLAY
+
+# Verify tmux can start
+tmux new-session -d -s test
+tmux list-sessions
+tmux kill-session -t test
+```
+
+
