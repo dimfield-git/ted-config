@@ -195,7 +195,7 @@ Veryfy that:
   Yazi appears in workspace 1
   tmux with HUD appears in workspace 2
 
-# After first boot, login as ted
+**After first boot, login as ted**
 
 ```bash
 # Verify programs are installed
