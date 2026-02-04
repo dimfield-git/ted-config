@@ -12,7 +12,7 @@
   networking.hostName = "tedos";
   time.timeZone = "Europe/Stockholm";
   i18n.defaultLocale = "en_US.UTF-8";
-
+  console.keyMap = "sv-latin1";
   # --- Networking ---
   networking.networkmanager.enable = true;
 
@@ -21,20 +21,25 @@
   users.users.ted = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ];
-    shell = pkgs.zsh;
+    shell = pkgs.bash;
+    initialPassword = "";  # ← Add this for empty password
   };
-  security.sudo.wheelNeedsPassword = true;
+
+  # Root with NO password
+  users.users.root.initialPassword = "";
+  # Sudo with NO password
+  security.sudo.wheelNeedsPassword = false;
 
   # Fonts (for powerline separators + icons)
   fonts.fontconfig.enable = true;
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
   ];
- 
+
 
   # --- Minimal GUI layer (NO desktop environment) ---
-  services.xserver.enable = true;          # plumbing only
-  services.displayManager.enable = false;  # no GDM/SDDM/etc
+  # services.xserver.enable = true;          # plumbing only
+  # services.displayManager.enable = false;  # no GDM/SDDM/etc
   programs.sway.enable = true;
 
   # --- Boot into cockpit automatically on tty1 ---
@@ -48,9 +53,9 @@
   # --- SSH (optional but recommended) ---
   services.openssh.enable = true;
   services.openssh.settings = {
-    PermitRootLogin = "no";
-    PasswordAuthentication = false;
-    KbdInteractiveAuthentication = false;
+    PermitRootLogin = "yes";
+    PasswordAuthentication = true;
+    PermitEmptyPasswords = true;
   };
 
   networking.firewall.enable = true;
@@ -64,7 +69,7 @@
 
     neovim
     vim
-    zsh starship
+   # zsh starship
 
     bat delta
     eza
@@ -80,11 +85,11 @@
     # yazi helpers
     file
     ffmpegthumbnailer
-    poppler_utils
+    poppler-utils
     unar
   ];
 
-  programs.zsh.enable = true;
+ # programs.zsh.enable = true;
 
   # IMPORTANT: keep whatever the installer generates if different
   system.stateVersion = "25.11";
