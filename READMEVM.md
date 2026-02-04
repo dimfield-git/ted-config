@@ -114,7 +114,7 @@ ls -l /mnt/etc/nixos/
 
 **File 1:** ```hardware-configuration.nix```
 
-*auto-detected hardware + mount config for this VM (disk UUIDs, filesystem mounts, drivers*
+*auto-detected hardware + mount config for this VM (disk UUIDs, filesystem mounts, drivers)*
 
 **File 2:** ```configuration.nix``` **(default stub)**
 
