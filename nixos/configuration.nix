@@ -26,7 +26,7 @@
   };
 
   # Root with NO password
-  users.users.root.initialPassword = "";
+  users.root.initialPassword = "";
   # Sudo with NO password
   security.sudo.wheelNeedsPassword = false;
 
@@ -37,18 +37,37 @@
   ];
 
 
-  # --- Minimal GUI layer (NO desktop environment) ---
-  # services.xserver.enable = true;          # plumbing only
-  # services.displayManager.enable = false;  # no GDM/SDDM/etc
-  programs.sway.enable = true;
+
+  # Enables Gnome Keyring to store secrets for applications.
+  services.gnome.gnome-keyring.enable = true;
+
+  # Enable Sway.
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true;
+  };
 
   # --- Boot into cockpit automatically on tty1 ---
   services.getty.autologinUser = "ted";
-  programs.bash.loginShellInit = ''
-    if [ -z "$WAYLAND_DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
+
+
+programs.bash.loginShellInit = ''
+  if [ -t 0 ] && [ -z "$WAYLAND_DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
+    read -t 5 -p "Start Sway? [Y/n]: " response
+    if [[ ! "$response" =~ ^[Nn]$ ]]; then
       exec sway
     fi
-  '';
+  fi
+'';
+
+
+#  programs.bash.loginShellInit = ''
+#    if [ -z "$WAYLAND_DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
+#      exec sway
+#    fi
+#  '';
+
+
 
   # --- SSH (optional but recommended) ---
   services.openssh.enable = true;
@@ -77,6 +96,8 @@
     btop
     jq
 
+    wl-clipboard # Copy/Paste functionality.
+    mako # Notification utility
     bind # provides dig
 
     git curl wget

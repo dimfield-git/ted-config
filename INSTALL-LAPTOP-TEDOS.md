@@ -1,6 +1,6 @@
 # TedOS Laptop Installation Guide
 
-**Target: Sister's HP 15-db0xxx (Ryzen 3 2200u, 256GB NVMe)**
+**Target: HP 15-db0xxx (Ryzen 3 2200u, 119GB SATA)**
 
 ---
 
@@ -53,35 +53,35 @@ ssh nixos@<LAPTOP_IP>
 lsblk
 ```
 
-Expect: `/dev/nvme0n1` (256GB)
+Expect: `/dev/sda` (119GB)
 
 ### 3.2 Partition
 
 ```bash
 # Create GPT partition table
-sudo parted -s /dev/nvme0n1 mklabel gpt
+sudo parted -s /dev/sda mklabel gpt
 
 # Create EFI partition (512 MB)
-sudo parted -s /dev/nvme0n1 mkpart ESP fat32 1MiB 513MiB
-sudo parted -s /dev/nvme0n1 set 1 esp on
+sudo parted -s /dev/sda mkpart ESP fat32 1MiB 513MiB
+sudo parted -s /dev/sda set 1 esp on
 
 # Create root partition (rest of disk)
-sudo parted -s /dev/nvme0n1 mkpart primary ext4 513MiB 100%
+sudo parted -s /dev/sda mkpart primary ext4 513MiB 100%
 ```
 
 ### 3.3 Format
 
 ```bash
-sudo mkfs.fat -F32 -n EFI /dev/nvme0n1p1
-sudo mkfs.ext4 -L nixos /dev/nvme0n1p2
+sudo mkfs.fat -F32 -n EFI /dev/sda1
+sudo mkfs.ext4 -L nixos /dev/sda2
 ```
 
 ### 3.4 Mount
 
 ```bash
-sudo mount /dev/nvme0n1p2 /mnt
+sudo mount /dev/sda2 /mnt
 sudo mkdir -p /mnt/boot
-sudo mount /dev/nvme0n1p1 /mnt/boot
+sudo mount /dev/sda1 /mnt/boot
 ```
 
 ### 3.5 Verify
