@@ -1,5 +1,8 @@
 # TedOS Laptop Installation Guide
 
+<img width="1024" height="1024" alt="TedOS" src="https://github.com/user-attachments/assets/5377617f-948c-476f-8b19-41288f9c6d05" />
+
+
 **Target: HP 15-db0xxx (Ryzen 3 2200u, 119GB SATA)**
 
 ---
@@ -239,4 +242,5 @@ TedOS laptop is ready when:
 - ✓ HUD scripts executable
 - ✓ Swedish keyboard works
 - ✓ Sway launches (or can work in terminal mode)
+<img width="1536" height="1024" alt="tedosbackdrop" src="https://github.com/user-attachments/assets/25251b1c-82a8-48cb-88d8-1e28c6133423" />
 
